@@ -1,0 +1,32 @@
+graph LR
+    subgraph ESP32
+        ESP_TX[GPIO17 TX2]
+        ESP_RX[GPIO16 RX2]
+        ESP_BTN[GPIO4 w/internal pull-up]
+        ESP_GND[GND]
+        ESP_3V[3.3V]
+    end
+    
+    subgraph Teensy
+        T_RX[RX1]
+        T_TX[TX1]
+        T_LED[Pin 13 LED]
+        T_GND[GND]
+        T_USB[USB]
+    end
+
+    subgraph Button
+        BTN_PIN[Pin]
+        BTN_GND[GND]
+    end
+    
+    ESP_TX --> T_RX
+    ESP_RX -.- T_TX
+    ESP_GND --> T_GND
+    ESP_GND --> BTN_GND
+    ESP_BTN --> BTN_PIN
+    T_USB --> U64[Ultimate 64 USB]
+    
+    style ESP32 fill:#f9f
+    style Teensy fill:#bbf
+    style Button fill:#bfb

@@ -1,0 +1,23 @@
+graph LR
+    subgraph ESP32[ESP32 - Program Storage]
+        BASIC[BASIC Programs
+        Read from local storage
+        and send it]
+        CTRL[Control Codes
+        Map C64 command sequences to be applied by the USB Bridge]
+        BASIC --> Serial
+        CTRL --> Serial
+    end
+    
+    subgraph Teensy[Teensy 3.2 - USB Bridge]
+        Serial --> KeyMap[Key Mapping]
+        KeyMap --> USB[USB HID]
+        LED[Status LED]
+    end
+    
+    subgraph U64[Ultimate 64]
+        USB --> KBD[USB Keyboard Input]
+        KBD --> SYS[C64 System]
+    end
+    
+
